@@ -94,7 +94,7 @@ export default class PptxGenerationService {
   }
 
   public async generatePptx(): Promise<string> {
-    this.fileStructure = new FileStructureService(this.workingDirectory, this.native)
+    this.fileStructure = new FileStructureService(this.workingDirectory, this.native, this.getSharedDir)
     if (Array.isArray(this.filePatterns)) {
       this.fileStructure.pictures = this.filePatterns
     } else {

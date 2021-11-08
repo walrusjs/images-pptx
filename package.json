@@ -3,6 +3,10 @@
   "version": "1.0.1",
   "description": "A simple javascript library for creating PPTX presentation from list of images",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",

@@ -1,5 +1,5 @@
 import { basename, join as pathJoin, extname } from 'path'
-import { FilePaths, PresentationMeta } from '../interfaces'
+import { FilePaths, PresentationMeta, Settings } from '../interfaces'
 import FileStructureService from './FileStructureService'
 import SwigRenderService from './SwigRenderService'
 import Templates from '../includes/templates'
@@ -25,6 +25,7 @@ export default class PptxGenerationService {
     private extension: string = 'jpg',
     private native = false,
     private meta: PresentationMeta = {},
+    private getSharedDir: Settings['getSharedDir'],
   ) {}
 
   private assembleSlidesArray(): void {

@@ -51,6 +51,7 @@ async function cliWork(): Promise<string> {
       settings.extension,
       settings.native,
       settings.meta,
+      settings.getSharedDir,
     )
     return await service.generatePptx()
   } catch (e) {

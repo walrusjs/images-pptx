@@ -27,4 +27,5 @@ export interface Settings {
   pptxFileName?: string
   native?: boolean
   meta?: PresentationMeta
+  getSharedDir?: (dir: string) => string
 }

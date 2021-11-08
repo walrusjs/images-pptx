@@ -14,6 +14,7 @@ export async function createPptx(settings: Settings): Promise<string | void> {
     settings.extension,
     settings.native,
     settings.meta,
+    settings.getSharedDir,
   )
   try {
     const result = await service.generatePptx()

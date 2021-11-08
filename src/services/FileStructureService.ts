@@ -3,6 +3,7 @@ import { join as pathJoin, extname } from 'path'
 import { ncpCopy } from '../utils'
 import * as archiver from 'archiver'
 import * as rimraf from 'rimraf'
+import { Settings } from '../interfaces'
 import NativeLaunchService from './NativeLaunchService'
 
 const { readdir, mkdtemp, mkdir } = promises
@@ -11,18 +12,21 @@ export default class FileStructureService {
   public tempPath = ''
   public pictures: string[] = []
   private command?: NativeLaunchService
+  private getSharedDir?: Settings['getSharedDir']
 
   /**
    *
    * @param workingDirectory
    * @param native
    */
-  constructor(private workingDirectory: string, private native = false) {
+  constructor(private workingDirectory: string, private native = false, getSharedDir?: Settings['getSharedDir']) {
     if (this.native) this.command = new NativeLaunchService()
+    this.getSharedDir = getSharedDir
   }
 
   private async copyShared(): Promise<{ what: string; where: string }> {
-    const sharedDir = pathJoin(__dirname, '../../shared')
+    const oldSharedDir = pathJoin(__dirname, '../../shared')
+    const sharedDir = this.getSharedDir ? this.getSharedDir(oldSharedDir) : oldSharedDir
     const pptMediaDir = pathJoin(this.tempPath, 'ppt/media')
     const pptRelsDir = pathJoin(this.tempPath, 'ppt/_rels')
     if (this.native) {
